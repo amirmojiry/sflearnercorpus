@@ -1,0 +1,272 @@
+@charset "utf-8";
+/* CSS Document */
+
+*
+{
+ margin:0;
+ padding:0;
+ font-family:Yekan, Tahoma, Verdana, Geneva, sans-serif;
+}
+
+@font-face {
+	font-family: "Yekan";
+	src: url(fonts/Yekan.eot);
+	src: url(fonts/Yekan.eot?#iefix) format("embedded-opentype"), url(fonts/Yekan.woff) format("woff"), url(fonts/Yekan.ttf) format("truetype"), url(fonts/Yekan.svg#BYekan) format("svg");
+	font-weight: normal;
+	font-style: normal
+}
+
+#login-form
+{
+ margin-top:70px;
+}
+table
+{
+ border:solid #dcdcdc 1px;
+ padding:15px;
+ box-shadow: 0px 0px 1px rgba(0,0,0,0.2);
+}
+table tr,td
+{
+ padding:15px;
+ //border:solid #e1e1e1 1px;
+}
+table tr td input
+{
+ width:97%;
+ height:45px;
+ border:solid #e1e1e1 1px;
+ border-radius:3px;
+ padding-left:10px;
+ font-size:16px;
+ background:#f9f9f9;
+ transition-duration:0.5s;
+ box-shadow: inset 0px 0px 1px rgba(0,0,0,0.4);
+}
+#main-table {
+ width=70%;
+}
+table tr td button
+{
+ width:100%;
+ height:45px;
+ border:0px;
+ background:rgba(12,45,78,11);
+ background:-moz-linear-gradient(top, #595959 , #515151);
+ border-radius:3px;
+ box-shadow: 1px 1px 1px rgba(1,0,0,0.2);
+ color:#f9f9f9;
+ font-size:18px;
+ font-weight:bolder;
+ text-transform:uppercase;
+}
+table tr td button:active
+{
+ position:relative;
+ top:1px;
+}
+table tr td a
+{
+ text-decoration:none;
+ color:#00a2d1;
+ font-size:18px;
+}
+
+/* css for home page  */
+
+*
+{
+ margin:0;
+ padding:0;
+}
+
+textarea, select
+{
+ width:97%;
+ border:solid #e1e1e1 1px;
+ border-radius:3px;
+ padding-left:10px;
+ font-size:16px;
+ background:#f9f9f9;
+ transition-duration:0.5s;
+ box-shadow: inset 0px 0px 1px rgba(0,0,0,0.4);
+}
+
+/* Select Type of Text */
+#type_text {
+  width:80%;
+  background-image: -webkit-repeating-linear-gradient(50deg, rgba(0,0,0,.3), rgba(0,0,0,.3) 1px, transparent 2px, transparent 2px, rgba(0,0,0,.3) 3px);
+  background-image: -moz-repeating-linear-gradient(50deg, rgba(0,0,0,.3), rgba(0,0,0,.3) 1px, transparent 2px, transparent 2px, rgba(0,0,0,.3) 3px);
+  background-image: -o-repeating-linear-gradient(50deg, rgba(0,0,0,.3), rgba(0,0,0,.3) 1px, transparent 2px, transparent 2px, rgba(0,0,0,.3) 3px);
+  background-image: repeating-linear-gradient(50deg, rgba(0,0,0,.3), rgba(0,0,0,.3) 1px, transparent 2px, transparent 2px, rgba(0,0,0,.3) 3px);
+  -webkit-background-size: 4px 4px;
+  -moz-background-size: 4px 4px;
+  background-size: 4px 4px;
+}
+/* End of Select Type of Text */
+
+/* Institut title */
+.institute_title {
+ font-size:80%; 
+ text-align: center;
+}
+/* End of Institut title */
+
+/* Jame Mustafa Header*/
+#mustafa_header_center {
+ width:40%;
+}
+
+#mustafa_header_left, #mustafa_header_right {
+ width:30%;
+}
+/* End Jame Mustafa Header*/
+
+/* end of css for home page */
+
+/* Header */
+
+#header
+{
+ width:100%;
+ height:90px;
+ background:rgba(00,11,22,33);
+ color:#9fa8b0;
+}
+#header #right
+{
+ float:right;
+ position:relative;
+}
+#header #right label
+{
+ position:relative;
+ top:5px;
+ right:100px;
+ font-size:35px;
+}
+#header #left
+{
+ float:left;
+ position:relative;
+}
+#header #left #content
+{
+ position:relative;
+ top:20px;
+ left:100px;
+ color:#fff;
+}
+
+#header #left #content ul{
+     overflow:hidden;
+     list-style:none;
+     margin:0px;
+}
+#header #left #content li {
+     border-left:1px solid #bbb;
+     float:right;
+     width:130px;
+     height:40px;
+     list-style:none;
+     margin:0 auto;
+}
+     #header #left #content a {
+     color:#03F1FA;
+     display:block;
+     line-height:40px;
+     text-align:center;
+     font-size:18px;
+     text-decoration:none;
+}
+#header #left #content a:hover {
+     background:#e3e3e3;
+     color:#333;
+}
+#header #left #content .active {
+     background:#e3e3e3;
+     color:#777;
+}
+
+/* End of Headr */
+/* css for insertdata page */
+   #text_code {
+    color: red;
+    font-weight: bold;
+    border-radius: 50%;
+    border: solid 1px;
+    padding: 5px;
+    }
+/* end of css for insertdata page */
+
+/* css for statistic page */
+   #name-you-statistic{
+      display: none;
+    }
+   #count-text-you-percentage{
+    border: solid 1px;
+    }
+/* end of css for statistic page */
+
+/* css for footer */
+#footer {
+    position: fixed;
+    height: 30px;
+    background-color: #65caf0;
+/*    color: #ff012b;*/
+    color: #000000;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+}
+/* end of css for footer */
+
+/* CSS for Print View */
+@media print {
+   table tr,td
+   {
+      padding:0;
+    }
+   #main-table {
+      width=100%;
+    }
+   #name-you-statistic{
+      display: block;
+    }
+   #left, #footer, .dont-print{
+      display: none;
+   }
+}
+/* End of CSS for Print View */
+
+/* View Page */
+#table-header{
+ overflow:hidden;
+ width:100%;
+ margin:auto;
+ background-color:#f1f1f1;
+}
+.table-header{
+ border-right:1px solid #ccc;
+ float:right; 
+ width:15%; 
+ height:30px;
+ padding:0 1% 0 0; 
+ line-height:2em; 
+}
+#table-record{ 
+ overflow:hidden;
+ width:100%;
+ margin:auto;
+}
+.table-record{
+border-right:1px solid #ddd;
+float:right;
+ width:15%;
+ height:25px;
+ padding:0 1% 0 0;
+ background-color:#f9f9f9;
+ line-height:2em;
+}
+/*End of View Page */

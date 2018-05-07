@@ -1,0 +1,40 @@
+imperative, .imperative{
+    background-color: #F44336;
+    color: white;
+}
+declarative, .declarative {
+    background-color: #9C27B0;
+    color: white;
+}
+implicative, .implicative {
+    background-color: #3F51B5;
+    color: white;
+}
+interrogative, .interrogative {
+    background-color: #00BCD4;
+    color: white;
+}
+pseudoSentence, .pseudoSentence {
+    background-color: #009688;
+    color: white;
+}
+coOrdinateCompound, .coOrdinateCompound {
+    background-color: #FFC107;
+    color: white;
+}
+subordinate, .subordinate {
+    background-color: #FF5722;
+    color: white;
+}
+conditional, .conditional {
+    background-color: #795548;
+    color: white;
+}
+causative, .causative {
+    background-color: #9E9E9E;
+    color: white;
+}
+passive, .passive {
+    background-color: #607D8B;
+    color: white;
+}
