@@ -25,7 +25,7 @@ else
         $coo->set_charset ( "utf8" );
         $result = mysqli_query ( $coo, "SET CHARACTER SET 'utf8';" );
         $result = mysqli_query ( $coo, "SET SESSION collation_connection = 'utf8_persian_ci';" );
-		
+
 		//query for types of texts
         $query = "SELECT * FROM type_text";
         $result = mysqli_query ( $coo, $query );
@@ -43,7 +43,7 @@ else
                 }
             }
         }
-		
+
 		//query for labels
 		$query_level_text = "SELECT * FROM level_text";
         $result_level_text = mysqli_query ( $coo, $query_level_text );
@@ -199,7 +199,7 @@ $userRow=mysqli_fetch_assoc($query);
                                         <small>
                                             ملیت
                                         </small>
-                                        <input type="text" name="Nationality" required maxlength="50"
+                                        <input type="text" name="nationality" required maxlength="50"
                                                class="form-control" placeholder="ملیت" />
                                     </div>
                                 </div>

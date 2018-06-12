@@ -25,12 +25,12 @@ else
         $coo->set_charset ( "utf8" );
         $result = mysqli_query ( $coo, "SET CHARACTER SET 'utf8';" );
         $result = mysqli_query ( $coo, "SET SESSION collation_connection = 'utf8_persian_ci';" );
-		
+
     }
 }
 
 
-						
+
 $query=mysqli_query($coo, "SELECT * FROM user WHERE User_ID=".$_SESSION['user']);
 $userRow=mysqli_fetch_assoc($query);
 ?>
@@ -38,8 +38,8 @@ $userRow=mysqli_fetch_assoc($query);
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title> 
-        - واردشدن داده ها 
+    <title>
+        - واردشدن داده ها
     </title>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
