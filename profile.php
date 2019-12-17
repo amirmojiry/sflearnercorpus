@@ -177,7 +177,8 @@ include 'left_sidebar.php';
                             </tfoot>
                             <tbody>
                             <?php
-							    for($i = 0; $i < count ( $AllTexts); $i ++) {
+                            if (isset($AllTexts)) {
+                                for($i = 0; $i < count ( $AllTexts); $i ++) {
                                     echo '<tr>';
                                     echo '<td>' .  $AllTexts [$i]['Subject']
                                         . '<a href="viewtext.php?ID='. $AllTexts [$i]["Text_ID"].'" target="_blank" title="دیدن متن">[<i class="material-icons font-12">remove_red_eye</i>] </a>'
@@ -200,6 +201,7 @@ include 'left_sidebar.php';
                                     echo '</td>';
                                     echo '</tr>';
                                 }
+                            }
                             ?>
                             </tbody>
                         </table>

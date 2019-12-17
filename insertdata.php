@@ -109,7 +109,11 @@ $type_text_id = $_POST['type_text'];
 $type_text_result=mysqli_query($coo,"SELECT * FROM type_text WHERE Type_Text_ID=".$_POST['type_text']);
 $type_text=mysqli_fetch_array($type_text_result);
 $level_text_id = $_POST['level_text_id'];
-$score = $_POST['score'];
+if (isset($_POST['score']) && $_POST['score'] !== "") {
+    $score = $_POST['score'];
+} else {
+    $score = 0;
+}
 $text = nl2br($_POST['text']);
 $typist_id=$_SESSION['user'];
 ?>
@@ -127,7 +131,7 @@ $typist_id=$_SESSION['user'];
                         <h2>
                            ممنون که متن دیگری ثبت کردید.
                             <small>
-لطفا کد برگه را گوشه ی بالا سمت چپ برگه بنویسید.
+                            لطفا کد برگه را گوشه ی بالا سمت چپ برگه بنویسید.
                             </small>
                         </h2>
                     </div>

@@ -6,6 +6,45 @@ if(!isset($_SESSION['user']))
 {
     header("Location: index.php");
 }
+global $HOSTDB; // Host name
+global $USERDB; // Mysql username
+global $PASSDB; // Mysql password
+global $NAMEDB;
+
+$coo = mysqli_connect ( $HOSTDB, $USERDB, $PASSDB, $NAMEDB );
+if (! $coo)
+{
+    die ( 'Could not connect: ' . mysqli_error ( $coo ) );
+}
+else
+{
+    if (! mysqli_connect_error ())
+    {
+
+        $coo->set_charset ( "utf8" );
+        $result = mysqli_query ( $coo, "SET CHARACTER SET 'utf8';" );
+        $result = mysqli_query ( $coo, "SET SESSION collation_connection = 'utf8_persian_ci';" );
+		
+		//query for texts
+		$query = "SELECT * FROM text WHERE Typist_ID=".$_SESSION['user'];
+        $result = mysqli_query ( $coo, $query );
+
+        if ($result)
+        {
+            if ($result->num_rows > 0)
+            {
+				$number = 0;
+				$AllTexts = array ();
+                while ( $mrow = mysqli_fetch_assoc ( $result ) )
+                {
+                    $AllTexts [$number] = $mrow;
+					$number++;
+                }
+            }
+        }
+    }
+}
+
 $query=mysql_query("SELECT * FROM user WHERE User_ID=".$_SESSION['user']);
 $userRow=mysql_fetch_array($query);
 ?>

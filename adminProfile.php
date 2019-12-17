@@ -13,6 +13,7 @@ global $PASSDB; // Mysql password
 global $NAMEDB;
 
 $coo = mysqli_connect ( $HOSTDB, $USERDB, $PASSDB, $NAMEDB );
+
 if (! $coo)
 {
     die ( 'Could not connect: ' . mysqli_error ( $coo ) );
@@ -21,52 +22,56 @@ else
 {
     if (! mysqli_connect_error ())
     {
-
         $coo->set_charset ( "utf8" );
         $result = mysqli_query ( $coo, "SET CHARACTER SET 'utf8';" );
         $result = mysqli_query ( $coo, "SET SESSION collation_connection = 'utf8_persian_ci';" );
 
-        //query for texts
-        $query = "SELECT * FROM text";
-        $result = mysqli_query ( $coo, $query );
+        //fetch user information
+        $query=mysqli_query($coo, "SELECT * FROM user WHERE User_ID=".$_SESSION['user']);
+        $userRow=mysqli_fetch_assoc($query);
 
-        if ($result)
-        {
-            if ($result->num_rows > 0)
+        if ($userRow['Level'] == '1') {
+            //query for texts
+            $query = "SELECT * FROM text";
+            $result = mysqli_query ( $coo, $query );
+
+            if ($result)
             {
-                $cntr = 0;
-                $AllTexts = array ();
-                while ( $mrow = mysqli_fetch_assoc ( $result ) )
+                if ($result->num_rows > 0)
                 {
-                    $AllTexts [$cntr] = $mrow;
-                    $cntr ++;
+                    $cntr = 0;
+                    $AllTexts = array ();
+                    while ( $mrow = mysqli_fetch_assoc ( $result ) )
+                    {
+                        $AllTexts [$cntr] = $mrow;
+                        $cntr ++;
+                    }
+                }
+            }
+            //query for labels
+            $query_label = "SELECT * FROM label_text";
+            $result_label = mysqli_query ( $coo, $query_label );
+
+            if ($result_label)
+            {
+                if ($result_label->num_rows > 0)
+                {
+                    $number_label = 0;
+                    $AllLabels = array ();
+                    while ( $mrow_label = mysqli_fetch_assoc ( $result_label ) )
+                    {
+                        $AllLabels [$number_label] = $mrow_label;
+                        $number_label ++;
+                    }
                 }
             }
         }
-        //query for labels
-        $query_label = "SELECT * FROM label_text";
-        $result_label = mysqli_query ( $coo, $query_label );
-
-        if ($result_label)
-        {
-            if ($result_label->num_rows > 0)
-            {
-                $number_label = 0;
-                $AllLabels = array ();
-                while ( $mrow_label = mysqli_fetch_assoc ( $result_label ) )
-                {
-                    $AllLabels [$number_label] = $mrow_label;
-                    $number_label ++;
-                }
-            }
+        else {
+            die ("you can't access this page.");
         }
     }
 }
 
-
-
-$query=mysqli_query($coo, "SELECT * FROM user WHERE User_ID=".$_SESSION['user']);
-$userRow=mysqli_fetch_assoc($query);
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -192,90 +197,6 @@ include 'left_sidebar.php';
 												</div>";
                             }
                             ?>
-                            <!--
-                            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                                <button class="btn btn-lg btn-block waves-effect imperative" type="button">
-                                    جمله امری
-                                    <span class="badge">
-                                        <?php
-                            /*$grammar = '<imperative>';
-                            $countGrammar = 0;
-                            for($i = 0; $i < count ( $AllTexts); $i ++) {
-                                  $countGrammar += substr_count($AllTexts[$i]['LabeledText'],$grammar);
-                             }
-                            echo $countGrammar;*/
-                            ?>
-                                    </span>
-                                </button>
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                                <button class="btn btn-lg btn-block waves-effect declarative" type="button">
-                                    جمله خبری
-                                    <span class="badge">
-                                    </span>
-                                </button>
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                                <button class="btn btn-lg btn-block waves-effect implicative" type="button">
-                                    جمله التزامی
-                                    <span class="badge">
-                                    </span>
-                                </button>
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                                <button class="btn btn-lg btn-block waves-effect interrogative" type="button">
-                                    جمله پرسشی
-                                    <span class="badge">
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                                <button class="btn btn-lg btn-block waves-effect pseudoSentence" type="button">
-                                    شبه جمله
-                                    <span class="badge">
-                                    </span>
-                                </button>
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                                <button class="btn btn-lg btn-block waves-effect coOrdinateCompound" type="button">
-                                    جمله مرکب همپایه
-                                    <span class="badge">
-                                    </span>
-                                </button>
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                                <button class="btn btn-lg btn-block waves-effect subordinate" type="button">
-                                    جمله ناهم پایه
-                                    <span class="badge">
-                                    </span>
-                                </button>
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                                <button class="btn btn-lg btn-block waves-effect conditional" type="button">
-                                    جمله شرطی
-                                    <span class="badge">
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                                <button class="btn btn-lg btn-block waves-effect causative" type="button">
-                                    جمله سببی
-                                    <span class="badge">
-                                    </span>
-                                </button>
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                                <button class="btn btn-lg btn-block waves-effect passive" type="button">
-                                    جمله مجهول
-                                    <span class="badge">
-                                    </span>
-                                </button>
-                            </div>
-							-->
                         </div>
                     </div>
                 </div>
@@ -325,7 +246,7 @@ include 'left_sidebar.php';
                                     نوع متن
                                 </th>
                                 <th>
-تعداد برچسب
+                                  تعداد برچسب
                                 </th>
                                 <th>
                                     سطح نویسنده
@@ -343,7 +264,6 @@ include 'left_sidebar.php';
                             </tfoot>
                             <tbody>
                             <?php
-                            //while ($row = mysqli_fetch_array($r, MYSQL_ASSOC)) {
                             for($i = 0; $i < count ( $AllTexts); $i ++) {
                                 if (isset($_GET['label'])){
                                     $firstOfTag = '<'.$_GET["label"].'>';
@@ -390,11 +310,6 @@ include 'left_sidebar.php';
                                 } else {
                                     echo '<a href="labeling1text.php?ID='.$AllTexts [$i]["Text_ID"].'"><i class="material-icons" style="color:green">check</i></a>';
                                 }
-                                echo '</td>';
-                                echo '<td>';
-                                /*foreach($allLabelsOfThisText as $LabelsOfThisText) {
-                                    echo $LabelsOfThisText, '<br>';
-                                }*/
                                 echo '</td>';
                                 echo '</tr>';
                             }

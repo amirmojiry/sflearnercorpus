@@ -59,7 +59,7 @@
                     <a href="adminProfile.php">
                         <i class="material-icons">layers</i>
                         <span>
-پروفایل مدیریتی
+                            پروفایل مدیریتی
                         </span>
                     </a>
                 </li>';
@@ -82,14 +82,14 @@
                         </span>
                     </a>
                 </li>
-                <li>
+                <!--<li>
                     <a href="statistic.php">
                         <i class="material-icons">layers</i>
                         <span>
                             آمار کاربران
                         </span>
                     </a>
-                </li>
+                </li>-->
                 <li>
                     <a href="viewtext.php">
                         <i class="material-icons">layers</i>
