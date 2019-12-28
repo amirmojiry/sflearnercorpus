@@ -301,9 +301,16 @@ include 'left_sidebar.php';
                                 $mrowLevelText = mysqli_fetch_assoc ( $resultLevelText) ;
                                 $LevelText = $mrowLevelText ['Level_Name']." (".$mrowLevelText ['Level_Institute'].")";
                                 echo '<td>' . $LevelText . '</td>';
-                                $query=mysqli_query($coo, "SELECT * FROM user WHERE User_ID=". $AllTexts [$i]['Labeler_ID']);
-                                $userRow=mysqli_fetch_assoc($query);
-                                echo '<td>' . $userRow['First_Name'].' '.$userRow['Last_Name'] . '</td>';
+                                $labeler_id = $AllTexts [$i]['Labeler_ID'];
+                                $query = mysqli_query($coo, "SELECT * FROM user WHERE User_ID = $labeler_id");
+                                if ($query !== FALSE) {
+                                    $userRow=mysqli_fetch_assoc($query);
+                                    $firstName = $userRow['First_Name'];
+                                    $lastName = $userRow['Last_Name'];
+                                } else {
+                                    $firstName = $lastName = '';
+                                }
+                                echo "<td>$firstName $lastName</td>";
                                 echo '<td>';
                                 if ($AllTexts [$i]['LabeledText']==''){
                                     echo '<a href="labeling1text.php?ID='.$AllTexts [$i]["Text_ID"].'"><i class="material-icons" style="color:red">close</i></a>';
@@ -311,6 +318,7 @@ include 'left_sidebar.php';
                                     echo '<a href="labeling1text.php?ID='.$AllTexts [$i]["Text_ID"].'"><i class="material-icons" style="color:green">check</i></a>';
                                 }
                                 echo '</td>';
+                                echo '<td></td>';
                                 echo '</tr>';
                             }
                             ?>
