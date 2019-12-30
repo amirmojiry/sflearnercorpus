@@ -186,7 +186,8 @@ include 'left_sidebar.php';
         ?>
         <div class="block-header">
             <h2>
-                برچسب گذاری متن بر اساس نوع خاصی از برچسب ها
+                برچسب گذاری متن بر اساس 
+                <?= $_GET['label_type']; ?>
             </h2>
         </div>
 			<div class="row clearfix">

@@ -171,7 +171,7 @@ include 'left_sidebar.php';
                                     شماره متن
                                 </th>
                                 <th>
-برچسب گذاری شده؟
+                                    برچسب گذاری شده؟
                                 </th>
                             </tr>
                             </tfoot>
@@ -179,13 +179,20 @@ include 'left_sidebar.php';
                             <?php
                             if (isset($AllTexts)) {
                                 for($i = 0; $i < count ( $AllTexts); $i ++) {
+                                    $errors_safari_labeling_get = '&label_type=errors-safari';
                                     echo '<tr>';
                                     echo '<td>' .  $AllTexts [$i]['Subject']
-                                        . '<a href="viewtext.php?ID='. $AllTexts [$i]["Text_ID"].'" target="_blank" title="دیدن متن">[<i class="material-icons font-12">remove_red_eye</i>] </a>'
-                                        . ' '.'<a href="edittext.php?ID='. $AllTexts [$i]["Text_ID"].'" target="_blank" title="ویرایش متن">[<i class="material-icons font-12">edit</i>]</a>'
-                                        . ' '.'<a href="labeling1text.php?ID='. $AllTexts [$i]["Text_ID"].'" target="_blank" title="برچسب گذاری متن">[<i class="material-icons font-12">description</i>]</a>'
-                                        . '</td>';
-
+                                        . '<a href="viewtext.php?ID='. $AllTexts [$i]["Text_ID"].'" target="_blank" title="دیدن متن">
+                                        [<i class="material-icons font-12">remove_red_eye</i>]</a>'
+                                        . '<a href="edittext.php?ID='. $AllTexts [$i]["Text_ID"].'" target="_blank" title="ویرایش متن">
+                                        [<i class="material-icons font-12">edit</i>]</a>'
+                                        . '<a href="labeling1text.php?ID='. $AllTexts [$i]["Text_ID"].'" target="_blank" title="برچسب گذاری متن">
+                                        [<i class="material-icons font-12">description</i>]</a>'
+                                        . '<a href="labeling1textWithLabelType.php?ID='.$AllTexts [$i]["Text_ID"]
+                                        .$errors_safari_labeling_get.'" title="برچسب زنی خطا بر اساس پژوهش سعید صفری">
+                                        [<i class="material-icons font-12">error</i>]</a>'
+                                    . '</td>';
+                                    
                                     $type_text_result = mysqli_query($coo, "SELECT * FROM type_text WHERE Type_Text_ID=" .  $AllTexts [$i]['Type_Text_ID']);
                                     $type_text = mysqli_fetch_assoc($type_text_result);
                                     echo '<td>' . $type_text["Type_Text"] . '</td>';
@@ -194,9 +201,11 @@ include 'left_sidebar.php';
                                     echo '<td>' . $userRow['User_Code'] . '-' .  $AllTexts [$i]["Text_ID"] . '</td>';
                                     echo '<td>';
                                     if ($AllTexts [$i]['LabeledText']==''){
-                                        echo '<a href="labeling1text.php?ID='. $AllTexts [$i]["Text_ID"].'"><i class="material-icons" style="color:red">close</i></a>';
+                                        echo '<a href="labeling1text.php?ID='. $AllTexts [$i]["Text_ID"].'">
+                                        <i class="material-icons" style="color:red">close</i></a>';
                                     } else {
-                                        echo '<a href="labeling1text.php?ID='. $AllTexts [$i]["Text_ID"].'"><i class="material-icons" style="color:green">check</i></a>';
+                                        echo '<a href="labeling1text.php?ID='. $AllTexts [$i]["Text_ID"].'">
+                                        <i class="material-icons" style="color:green">check</i></a>';
                                     }
                                     echo '</td>';
                                     echo '</tr>';

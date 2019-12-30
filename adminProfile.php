@@ -280,14 +280,19 @@ include 'left_sidebar.php';
 
                                     $allLabelsOfThisText = 0;
                                 }
-                                $labeling_with_label_type_link = '&label_type=word-formation';
+                                $word_formation_labeling_get = '&label_type=word-formation';
+                                $errors_safari_labeling_get = '&label_type=errors-safari';
                                 echo '<tr>';
                                 echo '<td>' . $AllTexts [$i]['Subject']
                                     . '<a href="viewtext.php?ID='.$AllTexts [$i]["Text_ID"].'">[<i class="material-icons font-12">remove_red_eye</i>] </a>'
                                     . '<a href="edittext.php?ID='.$AllTexts [$i]["Text_ID"].'">[<i class="material-icons font-12">edit</i>]</a>'
-                                    . '<a href="labeling1text.php?ID='.$AllTexts [$i]["Text_ID"].$label_link.'">[<i class="material-icons font-12">description</i>]</a>'
+                                    . '<a href="labeling1text.php?ID='.$AllTexts [$i]["Text_ID"].$label_link.'">[<i class="material-icons font-12"
+                                    title="برچسب زنی کلی متن">
+                                    description</i>]</a>'
                                     . '<a href="labeling1textWithLabelType.php?ID='.$AllTexts [$i]["Text_ID"]
-                                    .$labeling_with_label_type_link.'">[<i class="material-icons font-12">format_quote</i>]</a>'
+                                    .$word_formation_labeling_get.'" title="برچسب زنی صرفی">[<i class="material-icons font-12">format_quote</i>]</a>'
+                                    . '<a href="labeling1textWithLabelType.php?ID='.$AllTexts [$i]["Text_ID"]
+                                    .$errors_safari_labeling_get.'" title="برچسب زنی خطا بر اساس پژوهش سعید صفری">[<i class="material-icons font-12">error</i>]</a>'
                                     . '</td>';
 
                                 $type_text_result = mysqli_query ( $coo, "SELECT * FROM type_text WHERE Type_Text_ID=" . $AllTexts [$i]['Type_Text_ID']);
