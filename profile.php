@@ -43,6 +43,22 @@ else
                 }
             }
         }
+
+        //query for label types
+        $query = "SELECT label_type FROM label_text GROUP BY label_type";
+        $result = mysqli_query ($coo, $query);
+
+        if ($result)
+        {
+            if ($result->num_rows > 0)
+            {
+                $label_types = [];
+                while ($mrow = mysqli_fetch_assoc ($result))
+                {
+                    $label_types[] = $mrow["label_type"];
+                }
+            }
+        }
     }
 }
 
@@ -181,8 +197,11 @@ include 'left_sidebar.php';
                                 for($i = 0; $i < count ( $AllTexts); $i ++) {
                                     $errors_safari_labeling_get = '&label_type=errors-safari';
                                     echo '<tr>';
-                                    echo '<td>' .  $AllTexts [$i]['Subject']
-                                        . '<a href="viewtext.php?ID='. $AllTexts [$i]["Text_ID"].'" target="_blank" title="دیدن متن">
+                                    echo '<td>' .  $AllTexts [$i]['Subject'];
+                                    foreach ($label_types as $label_type) {
+                                        echo "<a href='labeling1textWithLabelType.php?ID={$AllTexts [$i]['Text_ID']}&label_type=$label_type'>[$label_type]</a>";
+                                    }
+                                    echo '<a href="viewtext.php?ID='. $AllTexts [$i]["Text_ID"].'" target="_blank" title="دیدن متن">
                                         [<i class="material-icons font-12">remove_red_eye</i>]</a>'
                                         . '<a href="edittext.php?ID='. $AllTexts [$i]["Text_ID"].'" target="_blank" title="ویرایش متن">
                                         [<i class="material-icons font-12">edit</i>]</a>'
