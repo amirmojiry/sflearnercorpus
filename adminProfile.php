@@ -48,6 +48,23 @@ else
                     }
                 }
             }
+
+            //query for label types
+            $query = "SELECT label_type FROM label_text GROUP BY label_type";
+            $result = mysqli_query ($coo, $query);
+
+            if ($result)
+            {
+                if ($result->num_rows > 0)
+                {
+                    $label_types = [];
+                    while ($mrow = mysqli_fetch_assoc ($result))
+                    {
+                        $label_types[] = $mrow["label_type"];
+                    }
+                }
+            }
+
             //query for labels
             $query_label = "SELECT * FROM label_text";
             $result_label = mysqli_query ( $coo, $query_label );
@@ -280,38 +297,36 @@ include 'left_sidebar.php';
 
                                     $allLabelsOfThisText = 0;
                                 }
-                                $word_formation_labeling_get = '&label_type=word-formation';
-                                $errors_safari_labeling_get = '&label_type=errors-safari';
                                 echo '<tr>';
-                                echo '<td>' . $AllTexts [$i]['Subject']
-                                    . '<a href="viewtext.php?ID='.$AllTexts [$i]["Text_ID"].'">[<i class="material-icons font-12">remove_red_eye</i>] </a>'
-                                    . '<a href="edittext.php?ID='.$AllTexts [$i]["Text_ID"].'">[<i class="material-icons font-12">edit</i>]</a>'
-                                    . '<a href="labeling1text.php?ID='.$AllTexts [$i]["Text_ID"].$label_link.'">[<i class="material-icons font-12"
-                                    title="برچسب زنی کلی متن">
-                                    description</i>]</a>'
-                                    . '<a href="labeling1textWithLabelType.php?ID='.$AllTexts [$i]["Text_ID"]
-                                    .$word_formation_labeling_get.'" title="برچسب زنی صرفی">[<i class="material-icons font-12">format_quote</i>]</a>'
-                                    . '<a href="labeling1textWithLabelType.php?ID='.$AllTexts [$i]["Text_ID"]
-                                    .$errors_safari_labeling_get.'" title="برچسب زنی خطا بر اساس پژوهش سعید صفری">[<i class="material-icons font-12">error</i>]</a>'
-                                    . '</td>';
+                                echo '<td>' . $AllTexts [$i]['Subject'];
+                                foreach ($label_types as $label_type) {
+                                    echo "<a href='labeling1textWithLabelType.php?ID={$AllTexts [$i]['Text_ID']}&label_type=$label_type'>[$label_type]</a>";
+                                }
+                                echo "<a href='viewtext.php?ID={$AllTexts [$i]['Text_ID']}' target='_blank' title='دیدن متن'>"
+                                ."[<i class='material-icons font-12'>remove_red_eye</i>]</a>"
+                                . "<a href='edittext.php?ID={$AllTexts [$i]['Text_ID']}' target='_blank' title='ویرایش متن'>"
+                                ."[<i class='material-icons font-12'>edit</i>]</a>"
+                                . "</td>";
 
-                                $type_text_result = mysqli_query ( $coo, "SELECT * FROM type_text WHERE Type_Text_ID=" . $AllTexts [$i]['Type_Text_ID']);
-                                $type_text = mysqli_fetch_assoc($type_text_result);
-                                echo '<td>' . $type_text["Type_Text"] . '</td>';
-                                echo '<td>' . $countGrammar . '</td>';
+                                $type_text_result = mysqli_fetch_assoc(mysqli_query ( $coo, "SELECT * FROM type_text WHERE Type_Text_ID=" . $AllTexts [$i]['Type_Text_ID']));
+                                $type_text = (isset($type_text_result["Type_Text"])) ? $type_text_result["Type_Text"]: "";
+                                echo "<td>$type_text</td>";
+                                echo "<td>$countGrammar</td>";
                                 // Level
                                 $Level_Text_ID = $AllTexts [$i]['Level_Text_ID'];
                                 $queryLevelText = "SELECT * FROM level_text WHERE Level_Text_ID='$Level_Text_ID'";
                                 $resultLevelText = mysqli_query ( $coo, $queryLevelText);
                                 $mrowLevelText = mysqli_fetch_assoc ( $resultLevelText) ;
-                                $LevelText = $mrowLevelText ['Level_Name']." (".$mrowLevelText ['Level_Institute'].")";
+                                $level_name = (isset($mrowLevelText ['Level_Name'])) ? $mrowLevelText ['Level_Name'] : "";
+                                $level_institute = (isset($mrowLevelText ['Level_Institute'])) ? $mrowLevelText ['Level_Institute'] : "";
+                                $LevelText = "$level_name ($level_institute)";
                                 echo '<td>' . $LevelText . '</td>';
                                 $labeler_id = $AllTexts [$i]['Labeler_ID'];
                                 $query = mysqli_query($coo, "SELECT * FROM user WHERE User_ID = $labeler_id");
                                 if ($query !== FALSE) {
                                     $userRow=mysqli_fetch_assoc($query);
-                                    $firstName = $userRow['First_Name'];
-                                    $lastName = $userRow['Last_Name'];
+                                    $firstName = (isset($userRow['First_Name'])) ? $userRow['First_Name']: "";
+                                    $lastName = (isset($userRow['Last_Name'])) ? $userRow['Last_Name'] : "";
                                 } else {
                                     $firstName = $lastName = '';
                                 }

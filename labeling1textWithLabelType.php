@@ -149,19 +149,17 @@ include 'left_sidebar.php';
             if (mysqli_num_rows($text_query) > 0) {
                 $text = mysqli_fetch_assoc($text_query);
                 $text_num = mysqli_num_rows($text_query);
-                $Text_ID = $text["Text_ID"];
-                $typist_ID = $text["Typist_ID"];
-                $Date_Type = $text["Date_Type"];
-                if ($text["Author_Name"]!=''){ $Author_Name = $text["Author_Name"];}
-                if ($text["Score"]!= 0){ $Score = $text["Score"];}
-                if ($text["Author_StudentNumber"]!=''){ $Author_StudentNumber = $text["Author_StudentNumber"];}
-                if ($text["Text"]!=''){ $MyText = $text["Text"];}
+                $Text_ID = (isset($text["Text_ID"])) ? $text["Text_ID"] : "";
+                $typist_ID = (isset($text["Typist_ID"])) ? $text["Typist_ID"] : "";
+                $Date_Type = (isset($text["Date_Type"])) ? $text["Date_Type"] : "";
+                $Author_Name = ($text["Author_Name"]!='') ? $text["Author_Name"] : "";
+                $Score = ($text["Score"]!= 0) ? $text["Score"] : "";
+                $Author_StudentNumber = ($text["Author_StudentNumber"]!='') ? $text["Author_StudentNumber"] : "";
+                $MyText = ($text["Text"]!='') ? $text["Text"] : "";
 
                 //get from label_text table
-                $LabeledText=mysqli_fetch_assoc(
-                              mysqli_query(
-                                $coo,"SELECT * FROM labeled_text WHERE text_id=".$Text_ID." AND label_type='".$label_type."'"))["labeled_text"];
-
+                $LabeledText_result = mysqli_fetch_assoc(mysqli_query($coo,"SELECT * FROM labeled_text WHERE text_id=".$Text_ID." AND label_type='".$label_type."'"));
+                $LabeledText = (isset($LabeledText_result)) ? $LabeledText_result["labeled_text"] : null;
                 $Nationality = $text["Nationality"];
                 $Subject = $text["Subject"];
                 $typist_query = mysqli_query($coo,"SELECT * FROM user WHERE User_ID =".$typist_ID);
