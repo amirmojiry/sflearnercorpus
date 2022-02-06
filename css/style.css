@@ -7617,7 +7617,7 @@ fieldset[disabled] .form-control {
 .login-page {
   background-color: #00BCD4;
   padding-left: 0;
-  max-width: 360px;
+  max-width: 600px;
   margin: 5% auto;
   overflow-x: hidden; }
   .login-page .login-box .msg {
@@ -7629,7 +7629,14 @@ fieldset[disabled] .form-control {
     text-decoration: none;
     color: #00BCD4; }
   .login-page .login-box .logo {
-    margin-bottom: 20px; }
+    margin-bottom: 20px;
+  }
+  .login-page .login-box .logo img {
+    width: 40%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
     .login-page .login-box .logo a {
       font-size: 36px;
       display: block;
@@ -7641,7 +7648,16 @@ fieldset[disabled] .form-control {
       width: 100%;
       text-align: center;
       color: #fff;
-      margin-top: -5px; }
+      margin-top: -5px;
+    }
+    .login-page .login-box .logo p {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      text-align: center;
+      direction: rtl;
+      font-size: 20px;
+    }
 
 /* Sign Up Page ================================ */
 .signup-page {
